@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="fdc55b8a-e7b5-497a-81bf-0d7be2bf1dfa" activeEnvironment="Default" name="SistemaProductosSOAP" resourceRoot="" soapui-version="5.10.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="4e0a1f43-f035-438f-87c5-b6cade12a5e2" wsaVersion="NONE" name="ProductosBinding" type="wsdl" bindingName="{http://example.com/productos}ProductosBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8000/productos?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8000/productos?wsdl"><con:part><con:url>http://localhost:8000/productos?wsdl</con:url><con:content><![CDATA[<definitions name="ProductosService" targetNamespace="http://example.com/productos" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://example.com/productos" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--Tipos de datos utilizados por el servicio-->
+  <types>
+    <xsd:schema targetNamespace="http://example.com/productos" elementFormDefault="qualified">
+      <!--Tipo de dato Producto-->
+      <xsd:complexType name="Producto">
+        <xsd:sequence>
+          <xsd:element name="codigo" type="xsd:string"/>
+          <xsd:element name="nombre" type="xsd:string"/>
+          <xsd:element name="categoria" type="xsd:string"/>
+          <xsd:element name="precio" type="xsd:double"/>
+          <xsd:element name="cantidad" type="xsd:int"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <!--RegistrarProducto-->
+      <xsd:element name="RegistrarProductoRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="codigo" type="xsd:string"/>
+            <xsd:element name="nombre" type="xsd:string"/>
+            <xsd:element name="categoria" type="xsd:string"/>
+            <xsd:element name="precio" type="xsd:double"/>
+            <xsd:element name="cantidad" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RegistrarProductoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="estado" type="xsd:boolean"/>
+            <xsd:element name="mensaje" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!--ConsultarProducto-->
+      <xsd:element name="ConsultarProductoRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="codigo" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ConsultarProductoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="estado" type="xsd:boolean"/>
+            <xsd:element name="mensaje" type="xsd:string"/>
+            <xsd:element name="codigo" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="categoria" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="precio" type="xsd:double" minOccurs="0"/>
+            <xsd:element name="cantidad" type="xsd:int" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!--ListarProductos-->
+      <xsd:element name="ListarProductosRequest">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListarProductosResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="estado" type="xsd:boolean"/>
+            <xsd:element name="mensaje" type="xsd:string"/>
+            <xsd:element name="productos" type="tns:Producto" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!--ActualizarStock-->
+      <xsd:element name="ActualizarStockRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="codigo" type="xsd:string"/>
+            <xsd:element name="nuevaCantidad" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ActualizarStockResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="estado" type="xsd:boolean"/>
+            <xsd:element name="mensaje" type="xsd:string"/>
+            <xsd:element name="cantidadActualizada" type="xsd:int" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!--CalcularValorInventario-->
+      <xsd:element name="CalcularValorInventarioRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="codigo" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CalcularValorInventarioResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="estado" type="xsd:boolean"/>
+            <xsd:element name="mensaje" type="xsd:string"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="precio" type="xsd:double" minOccurs="0"/>
+            <xsd:element name="cantidad" type="xsd:int" minOccurs="0"/>
+            <xsd:element name="valorTotal" type="xsd:double" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <!--EliminarProducto-->
+      <xsd:element name="EliminarProductoRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="codigo" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="EliminarProductoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="estado" type="xsd:boolean"/>
+            <xsd:element name="mensaje" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <!--Mensajes de RegistrarProducto-->
+  <message name="RegistrarProductoInput">
+    <part name="parameters" element="tns:RegistrarProductoRequest"/>
+  </message>
+  <message name="RegistrarProductoOutput">
+    <part name="parameters" element="tns:RegistrarProductoResponse"/>
+  </message>
+  <!--Mensajes de ConsultarProducto-->
+  <message name="ConsultarProductoInput">
+    <part name="parameters" element="tns:ConsultarProductoRequest"/>
+  </message>
+  <message name="ConsultarProductoOutput">
+    <part name="parameters" element="tns:ConsultarProductoResponse"/>
+  </message>
+  <!--Mensajes de ListarProductos-->
+  <message name="ListarProductosInput">
+    <part name="parameters" element="tns:ListarProductosRequest"/>
+  </message>
+  <message name="ListarProductosOutput">
+    <part name="parameters" element="tns:ListarProductosResponse"/>
+  </message>
+  <!--Mensajes de ActualizarStock-->
+  <message name="ActualizarStockInput">
+    <part name="parameters" element="tns:ActualizarStockRequest"/>
+  </message>
+  <message name="ActualizarStockOutput">
+    <part name="parameters" element="tns:ActualizarStockResponse"/>
+  </message>
+  <!--Mensajes de CalcularValorInventario-->
+  <message name="CalcularValorInventarioInput">
+    <part name="parameters" element="tns:CalcularValorInventarioRequest"/>
+  </message>
+  <message name="CalcularValorInventarioOutput">
+    <part name="parameters" element="tns:CalcularValorInventarioResponse"/>
+  </message>
+  <!--Mensajes de EliminarProducto-->
+  <message name="EliminarProductoInput">
+    <part name="parameters" element="tns:EliminarProductoRequest"/>
+  </message>
+  <message name="EliminarProductoOutput">
+    <part name="parameters" element="tns:EliminarProductoResponse"/>
+  </message>
+  <!--Operaciones disponibles-->
+  <portType name="ProductosPortType">
+    <operation name="RegistrarProducto">
+      <input message="tns:RegistrarProductoInput"/>
+      <output message="tns:RegistrarProductoOutput"/>
+    </operation>
+    <operation name="ConsultarProducto">
+      <input message="tns:ConsultarProductoInput"/>
+      <output message="tns:ConsultarProductoOutput"/>
+    </operation>
+    <operation name="ListarProductos">
+      <input message="tns:ListarProductosInput"/>
+      <output message="tns:ListarProductosOutput"/>
+    </operation>
+    <operation name="ActualizarStock">
+      <input message="tns:ActualizarStockInput"/>
+      <output message="tns:ActualizarStockOutput"/>
+    </operation>
+    <operation name="CalcularValorInventario">
+      <input message="tns:CalcularValorInventarioInput"/>
+      <output message="tns:CalcularValorInventarioOutput"/>
+    </operation>
+    <operation name="EliminarProducto">
+      <input message="tns:EliminarProductoInput"/>
+      <output message="tns:EliminarProductoOutput"/>
+    </operation>
+  </portType>
+  <!--Configuración SOAP-->
+  <binding name="ProductosBinding" type="tns:ProductosPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="RegistrarProducto">
+      <soap:operation soapAction="RegistrarProducto"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ConsultarProducto">
+      <soap:operation soapAction="ConsultarProducto"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ListarProductos">
+      <soap:operation soapAction="ListarProductos"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ActualizarStock">
+      <soap:operation soapAction="ActualizarStock"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CalcularValorInventario">
+      <soap:operation soapAction="CalcularValorInventario"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="EliminarProducto">
+      <soap:operation soapAction="EliminarProducto"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <!--Servicio y dirección-->
+  <service name="ProductosService">
+    <port name="ProductosPort" binding="tns:ProductosBinding">
+      <soap:address location="http://localhost:8000/productos"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8000/productos</con:endpoint></con:endpoints><con:operation id="791a4650-9453-456a-9f48-30636601d7d8" isOneWay="false" action="ActualizarStock" name="ActualizarStock" bindingOperationName="ActualizarStock" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2eafb17a-b95b-4ad4-822c-26beda37c042" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8000/productos</con:endpoint><con:request><![CDATA[<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:pro="http://example.com/productos">
+
+    <soapenv:Header/>
+
+    <soapenv:Body>
+        <pro:ActualizarStockRequest>
+            <pro:codigo>P201</pro:codigo>
+            <pro:nuevaCantidad>18</pro:nuevaCantidad>
+        </pro:ActualizarStockRequest>
+    </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ActualizarStock"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="edb2bf37-860a-4207-861f-e18e941c250d" isOneWay="false" action="CalcularValorInventario" name="CalcularValorInventario" bindingOperationName="CalcularValorInventario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="127e67ab-64b9-4f0a-b014-c3852cb2e5e3" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8000/productos</con:endpoint><con:request><![CDATA[<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:pro="http://example.com/productos">
+
+    <soapenv:Header/>
+
+    <soapenv:Body>
+        <pro:CalcularValorInventarioRequest>
+            <pro:codigo>P201</pro:codigo>
+        </pro:CalcularValorInventarioRequest>
+    </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="CalcularValorInventario"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="7df982d1-a3fb-4757-9056-cb51d38eb891" isOneWay="false" action="ConsultarProducto" name="ConsultarProducto" bindingOperationName="ConsultarProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a59faf3c-b94b-4a4e-925f-c79f06c5ab5b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8000/productos</con:endpoint><con:request><![CDATA[<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:pro="http://example.com/productos">
+
+    <soapenv:Header/>
+
+    <soapenv:Body>
+        <pro:ConsultarProductoRequest>
+            <pro:codigo>P999</pro:codigo>
+        </pro:ConsultarProductoRequest>
+    </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ConsultarProducto"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="82c5b262-4b07-426f-9b0b-0b3e73835ac4" isOneWay="false" action="EliminarProducto" name="EliminarProducto" bindingOperationName="EliminarProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="072a0c7c-51c0-44bb-81c2-41e2ee28b49c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8000/productos</con:endpoint><con:request><![CDATA[<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:pro="http://example.com/productos">
+
+    <soapenv:Header/>
+
+    <soapenv:Body>
+        <pro:EliminarProductoRequest>
+            <pro:codigo>P201</pro:codigo>
+        </pro:EliminarProductoRequest>
+    </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="EliminarProducto"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="fa891f60-0cf5-456f-a732-ab3e2475b230" isOneWay="false" action="ListarProductos" name="ListarProductos" bindingOperationName="ListarProductos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c7028147-8c41-4088-843c-e27f0cc7a89d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8000/productos</con:endpoint><con:request><![CDATA[<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:pro="http://example.com/productos">
+
+    <soapenv:Header/>
+
+    <soapenv:Body>
+        <pro:ListarProductosRequest/>
+    </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ListarProductos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1dc8c52e-0b36-4875-8c56-9d929c8c365d" isOneWay="false" action="RegistrarProducto" name="RegistrarProducto" bindingOperationName="RegistrarProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d14a4279-535f-4c3a-b40d-9cfd691e7bb7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8000/productos</con:endpoint><con:request><![CDATA[<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:pro="http://example.com/productos">
+
+    <soapenv:Header/>
+
+    <soapenv:Body>
+        <pro:RegistrarProductoRequest>
+            <pro:codigo>P201</pro:codigo>
+            <pro:nombre>Audífonos Bluetooth</pro:nombre>
+            <pro:categoria>Tecnología</pro:categoria>
+            <pro:precio>35.50</pro:precio>
+            <pro:cantidad>10</pro:cantidad>
+        </pro:RegistrarProductoRequest>
+    </soapenv:Body>
+
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="RegistrarProducto"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
